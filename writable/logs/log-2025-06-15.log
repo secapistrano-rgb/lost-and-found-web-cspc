@@ -1,0 +1,217 @@
+ERROR - 2025-06-15 16:00:44 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#12 {main}
+CRITICAL - 2025-06-15 16:00:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `items`
+WHERE `status` = :status:', [...], false)
+ 3 SYSTEMPATH\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+ 4 APPPATH\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\XAMPPS\\htdocs\\hopkins\\lost-and-found\\public\\index.php')
+ERROR - 2025-06-15 16:04:05 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#12 {main}
+CRITICAL - 2025-06-15 16:04:05 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `items`
+WHERE `status` = :status:', [...], false)
+ 3 SYSTEMPATH\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+ 4 APPPATH\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\XAMPPS\\htdocs\\hopkins\\lost-and-found\\public\\index.php')
+ERROR - 2025-06-15 16:04:07 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#12 {main}
+CRITICAL - 2025-06-15 16:04:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `items`
+WHERE `status` = :status:', [...], false)
+ 3 SYSTEMPATH\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+ 4 APPPATH\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\XAMPPS\\htdocs\\hopkins\\lost-and-found\\public\\index.php')
+ERROR - 2025-06-15 16:04:24 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#3 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#4 C:\XAMPPS\htdocs\hopkins\lost-and-found\app\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+#5 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#6 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\XAMPPS\htdocs\hopkins\lost-and-found\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\XAMPPS\htdocs\hopkins\lost-and-found\system\rewrite.php(44): require_once('C:\\XAMPPS\\htdoc...')
+#12 {main}
+CRITICAL - 2025-06-15 16:04:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `items`
+WHERE `status` = :status:', [...], false)
+ 3 SYSTEMPATH\Model.php(676): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+ 4 APPPATH\Controllers\Home.php(13): CodeIgniter\Model->countAllResults()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\XAMPPS\\htdocs\\hopkins\\lost-and-found\\public\\index.php')
+DEBUG - 2025-06-15 16:06:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:06:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:07:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:07:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:07:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:10:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:11:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:15:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:15:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:16:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:16:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:18:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:18:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:18:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:19:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-15 16:19:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
