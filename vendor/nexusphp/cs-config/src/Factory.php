@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Nexus\CsConfig;
 
+use Nexus\CsConfig\Ruleset\ConfigurableAllowedUnsupportedPhpVersionRulesetInterface;
 use Nexus\CsConfig\Ruleset\RulesetInterface;
 use PhpCsFixer\Config;
 use PhpCsFixer\ConfigInterface;
@@ -39,7 +40,10 @@ final class Factory
      *     rules: array<string, array<string, mixed>|bool>
      * } $options Array of resolved options
      */
-    private function __construct(private RulesetInterface $ruleset, private array $options) {}
+    private function __construct(
+        private RulesetInterface $ruleset,
+        private array $options,
+    ) {}
 
     /**
      * Prepares the ruleset and options before the `PhpCsFixer\Config` object
@@ -70,20 +74,15 @@ final class Factory
             ));
         }
 
-        // Meant to be used in vendor/ to get to the root directory
-        $dir = \dirname(__DIR__, 4);
-        $dir = (string) realpath($dir);
-
-        $defaultFinder = Finder::create()
-            ->files()
-            ->in([$dir])
-            ->exclude(['build'])
-        ;
-
         // Resolve Config options
         $options['cacheFile'] ??= '.php-cs-fixer.cache';
         $options['customFixers'] ??= [];
-        $options['finder'] ??= $defaultFinder;
+        // Default finder meant to be used in vendor/ to get to the root directory
+        $options['finder'] ??= Finder::create()
+            ->files()
+            ->in([(string) realpath(\dirname(__DIR__, 4))])
+            ->exclude(['build'])
+        ;
         $options['format'] ??= 'txt';
         $options['hideProgress'] ??= false;
         $options['indent'] ??= '    ';
@@ -149,14 +148,11 @@ final class Factory
      * The main method of creating the Config instance.
      *
      * @param array<string, array<string, mixed>|bool> $overrides
-     *
-     * @internal
      */
     private function invoke(array $overrides = []): ConfigInterface
     {
-        $rules = array_merge($this->options['rules'], $overrides);
-
-        return (new Config($this->ruleset->getName()))
+        /** @var Config $config */
+        $config = (new Config($this->ruleset->getName()))
             ->setParallelConfig(ParallelConfigFactory::detect())
             ->registerCustomFixers($this->options['customFixers'])
             ->setCacheFile($this->options['cacheFile'])
@@ -167,7 +163,16 @@ final class Factory
             ->setLineEnding($this->options['lineEnding'])
             ->setRiskyAllowed($this->options['isRiskyAllowed'])
             ->setUsingCache($this->options['usingCache'])
-            ->setRules($rules)
+            ->setRules([...$this->options['rules'], ...$overrides])
         ;
+
+        // @todo v4.0.0 Cleanup
+        if ($this->ruleset instanceof ConfigurableAllowedUnsupportedPhpVersionRulesetInterface) {
+            $config = $config->setUnsupportedPhpVersionAllowed(
+                $this->ruleset->isUnsupportedPhpVersionAllowed(),
+            );
+        }
+
+        return $config;
     }
 }

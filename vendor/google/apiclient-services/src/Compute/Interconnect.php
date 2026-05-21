@@ -23,7 +23,13 @@ class Interconnect extends \Google\Collection
   /**
    * @var bool
    */
+  public $aaiEnabled;
+  /**
+   * @var bool
+   */
   public $adminEnabled;
+  protected $applicationAwareInterconnectType = InterconnectApplicationAwareInterconnect::class;
+  protected $applicationAwareInterconnectDataType = '';
   /**
    * @var string[]
    */
@@ -138,7 +144,25 @@ class Interconnect extends \Google\Collection
    * @var string
    */
   public $state;
+  /**
+   * @var string
+   */
+  public $subzone;
 
+  /**
+   * @param bool
+   */
+  public function setAaiEnabled($aaiEnabled)
+  {
+    $this->aaiEnabled = $aaiEnabled;
+  }
+  /**
+   * @return bool
+   */
+  public function getAaiEnabled()
+  {
+    return $this->aaiEnabled;
+  }
   /**
    * @param bool
    */
@@ -152,6 +176,20 @@ class Interconnect extends \Google\Collection
   public function getAdminEnabled()
   {
     return $this->adminEnabled;
+  }
+  /**
+   * @param InterconnectApplicationAwareInterconnect
+   */
+  public function setApplicationAwareInterconnect(InterconnectApplicationAwareInterconnect $applicationAwareInterconnect)
+  {
+    $this->applicationAwareInterconnect = $applicationAwareInterconnect;
+  }
+  /**
+   * @return InterconnectApplicationAwareInterconnect
+   */
+  public function getApplicationAwareInterconnect()
+  {
+    return $this->applicationAwareInterconnect;
   }
   /**
    * @param string[]
@@ -572,6 +610,20 @@ class Interconnect extends \Google\Collection
   public function getState()
   {
     return $this->state;
+  }
+  /**
+   * @param string
+   */
+  public function setSubzone($subzone)
+  {
+    $this->subzone = $subzone;
+  }
+  /**
+   * @return string
+   */
+  public function getSubzone()
+  {
+    return $this->subzone;
   }
 }
 

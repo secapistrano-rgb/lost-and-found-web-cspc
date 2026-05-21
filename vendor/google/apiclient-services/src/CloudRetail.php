@@ -154,6 +154,16 @@ class CloudRetail extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'getConversationalSearchCustomizationConfig' => [
+              'path' => 'v2/{+name}/conversationalSearchCustomizationConfig',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'getDefaultBranch' => [
               'path' => 'v2/{+catalog}:getDefaultBranch',
               'httpMethod' => 'GET',
@@ -235,6 +245,20 @@ class CloudRetail extends \Google\Service
               'httpMethod' => 'PATCH',
               'parameters' => [
                 'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'updateConversationalSearchCustomizationConfig' => [
+              'path' => 'v2/{+catalog}/conversationalSearchCustomizationConfig',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'catalog' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -788,7 +812,17 @@ class CloudRetail extends \Google\Service
         'placements',
         [
           'methods' => [
-            'predict' => [
+            'conversationalSearch' => [
+              'path' => 'v2/{+placement}:conversationalSearch',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'placement' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'predict' => [
               'path' => 'v2/{+placement}:predict',
               'httpMethod' => 'POST',
               'parameters' => [
@@ -823,6 +857,16 @@ class CloudRetail extends \Google\Service
               'httpMethod' => 'POST',
               'parameters' => [
                 'servingConfig' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'conversationalSearch' => [
+              'path' => 'v2/{+placement}:conversationalSearch',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'placement' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,

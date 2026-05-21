@@ -35,6 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'auth'          => \App\Filters\AuthFilter::class,
+        'role'          => \App\Filters\RoleFilter::class,
     ];
 
     /**
@@ -107,11 +108,20 @@ class Filters extends BaseFilters
     public array $filters = [
         'auth' => [
             'before' => [
-                'dashboard*',
-                'items*',
-                'claims*',
-                'users*',
-                '/'
+                'dashboard', 'dashboard/*', 'items', 'items/*', 'claims', 'claims/*', 
+                'emails', 'emails/*', 'users', 'users/*', 'admin_role', 'admin_role/*', 
+                'feedback', 'feedback/*', 'help-support', 'help-support/*', 'reports', 
+                'reports/*', 'match', 'match/*', 'matches', 'matches/*', 'notifications', 
+                'notifications/*', 'profile', 'profile/*', 'activity-logs', 'activity-logs/*'
+            ]
+        ],
+        'role' => [
+            'before' => [
+                'dashboard', 'dashboard/*', 'items', 'items/*', 'claims', 'claims/*', 
+                'emails', 'emails/*', 'users', 'users/*', 'admin_role', 'admin_role/*', 
+                'feedback', 'feedback/*', 'help-support', 'help-support/*', 'reports', 
+                'reports/*', 'match', 'match/*', 'matches', 'matches/*', 'notifications', 
+                'notifications/*', 'profile', 'profile/*', 'activity-logs', 'activity-logs/*'
             ]
         ]
     ];

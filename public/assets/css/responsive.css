@@ -1,0 +1,441 @@
+/* ===== RESPONSIVE FRAMEWORK FOR CSPC LOST & FOUND ===== */
+
+/* CSS Variables for Responsive Breakpoints */
+:root {
+    --breakpoint-xs: 576px;
+    --breakpoint-sm: 768px;
+    --breakpoint-md: 992px;
+    --breakpoint-lg: 1200px;
+    --breakpoint-xl: 1400px;
+    
+    /* Sidebar Variables */
+    --sidebar-width: 280px;
+    --sidebar-collapsed-width: 60px;
+    
+    /* Spacing Variables */
+    --content-padding: 1.5rem;
+    --content-padding-mobile: 1rem;
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+
+/* Display Utilities */
+.d-mobile-none { display: block; }
+.d-mobile-block { display: none; }
+.d-tablet-none { display: block; }
+.d-tablet-block { display: none; }
+.d-desktop-none { display: block; }
+.d-desktop-block { display: none; }
+
+/* Text Utilities */
+.text-mobile-center { text-align: left; }
+.text-tablet-center { text-align: left; }
+
+/* Spacing Utilities */
+.p-mobile-1 { padding: 0.25rem; }
+.p-mobile-2 { padding: 0.5rem; }
+.p-mobile-3 { padding: 1rem; }
+.m-mobile-1 { margin: 0.25rem; }
+.m-mobile-2 { margin: 0.5rem; }
+.m-mobile-3 { margin: 1rem; }
+
+/* ===== RESPONSIVE SIDEBAR ===== */
+.sidebar-responsive {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.9) 0%, rgba(42, 82, 152, 0.9) 50%, rgba(0, 51, 102, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: transform 0.3s ease, width 0.3s ease;
+    transform: translateX(0);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: var(--cspc-primary);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: var(--cspc-secondary);
+    transform: scale(1.05);
+}
+
+.main-content-responsive {
+    margin-left: var(--sidebar-width);
+    padding: var(--content-padding);
+    transition: margin-left 0.3s ease, padding 0.3s ease;
+    min-height: 100vh;
+}
+
+/* ===== RESPONSIVE TABLES ===== */
+.table-responsive-custom {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive-custom table {
+    min-width: 600px;
+}
+
+.table-mobile-stack {
+    display: table;
+}
+
+.table-mobile-stack thead {
+    display: none;
+}
+
+.table-mobile-stack tbody,
+.table-mobile-stack tr,
+.table-mobile-stack td {
+    display: block;
+}
+
+.table-mobile-stack tr {
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-mobile-stack td {
+    border: none;
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 40%;
+}
+
+.table-mobile-stack td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 35%;
+    font-weight: bold;
+    color: var(--cspc-primary);
+}
+
+/* ===== RESPONSIVE CARDS ===== */
+.card-responsive {
+    margin-bottom: 1rem;
+}
+
+.card-grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ===== RESPONSIVE FORMS ===== */
+.form-responsive .row {
+    margin: 0;
+}
+
+.form-responsive .col-md-6,
+.form-responsive .col-md-4,
+.form-responsive .col-md-3 {
+    padding: 0.5rem;
+}
+
+/* ===== RESPONSIVE BUTTONS ===== */
+.btn-group-responsive {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.btn-responsive {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Extra Small Devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .d-mobile-none { display: none !important; }
+    .d-mobile-block { display: block !important; }
+    .text-mobile-center { text-align: center !important; }
+    
+    .sidebar-responsive {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .sidebar-responsive.show {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .sidebar-toggle {
+        display: block;
+    }
+    
+    .main-content-responsive {
+        margin-left: 0;
+        padding: var(--content-padding-mobile);
+        padding-top: 4rem;
+    }
+    
+    .table-mobile-stack {
+        display: block;
+    }
+    
+    .card-grid-responsive {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .btn-group-responsive {
+        flex-direction: column;
+    }
+    
+    .btn-responsive {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Mobile-specific spacing */
+    .p-mobile-1 { padding: 0.25rem !important; }
+    .p-mobile-2 { padding: 0.5rem !important; }
+    .p-mobile-3 { padding: 1rem !important; }
+    .m-mobile-1 { margin: 0.25rem !important; }
+    .m-mobile-2 { margin: 0.5rem !important; }
+    .m-mobile-3 { margin: 1rem !important; }
+    
+    /* Hide complex elements on mobile */
+    .email-meta,
+    .email-labels {
+        display: none;
+    }
+    
+    .email-item {
+        padding: 1rem;
+    }
+    
+    .email-content {
+        padding-right: 0;
+    }
+}
+
+/* Small Devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .d-mobile-none { display: none !important; }
+    .d-mobile-block { display: block !important; }
+    
+    .sidebar-responsive {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar-responsive.show {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .sidebar-toggle {
+        display: block;
+    }
+    
+    .main-content-responsive {
+        margin-left: 0;
+        padding-top: 4rem;
+    }
+    
+    .card-grid-responsive {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Medium Devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .d-tablet-none { display: none !important; }
+    .d-tablet-block { display: block !important; }
+    .text-tablet-center { text-align: center !important; }
+    
+    .sidebar-responsive {
+        width: var(--sidebar-collapsed-width);
+    }
+    
+    .sidebar-responsive .sidebar-nav a span {
+        display: none;
+    }
+    
+    .sidebar-responsive .sidebar-header h3 {
+        display: none;
+    }
+    
+    .main-content-responsive {
+        margin-left: var(--sidebar-collapsed-width);
+    }
+    
+    .card-grid-responsive {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .d-desktop-none { display: none !important; }
+    .d-desktop-block { display: block !important; }
+    
+    .card-grid-responsive {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Extra Large Devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .card-grid-responsive {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ===== RESPONSIVE EMAIL/ACTIVITY LOG STYLES ===== */
+@media (max-width: 767.98px) {
+    .email-container {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .email-header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .email-toolbar {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .search-toolbar {
+        margin: 0 0 1rem 0;
+        border-radius: 0;
+        padding: 1rem;
+    }
+    
+    .search-toolbar .row {
+        flex-direction: column;
+    }
+    
+    .search-toolbar .col-md-4,
+    .search-toolbar .col-md-3,
+    .search-toolbar .col-md-2 {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .bulk-actions {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* ===== RESPONSIVE DASHBOARD STYLES ===== */
+@media (max-width: 767.98px) {
+    .min-h-screen {
+        padding: 1rem;
+    }
+    
+    .max-w-7xl {
+        max-width: 100%;
+    }
+    
+    .grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .glass-card {
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+    
+    .text-display {
+        font-size: 1.5rem;
+    }
+    
+    .flex.flex-col.lg\\:flex-row {
+        flex-direction: column;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .sidebar-responsive,
+    .sidebar-toggle,
+    .sidebar-overlay {
+        display: none !important;
+    }
+    
+    .main-content-responsive {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .email-toolbar,
+    .search-toolbar,
+    .bulk-actions {
+        display: none !important;
+    }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar-responsive,
+    .sidebar-overlay,
+    .sidebar-toggle,
+    .main-content-responsive {
+        transition: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .sidebar-responsive {
+        border-right: 2px solid;
+    }
+    
+    .email-item {
+        border: 1px solid;
+    }
+}

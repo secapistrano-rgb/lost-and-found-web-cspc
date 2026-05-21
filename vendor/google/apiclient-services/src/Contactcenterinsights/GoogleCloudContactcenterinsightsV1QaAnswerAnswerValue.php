@@ -34,7 +34,13 @@ class GoogleCloudContactcenterinsightsV1QaAnswerAnswerValue extends \Google\Mode
   public $normalizedScore;
   public $numValue;
   public $potentialScore;
+  protected $rationaleType = GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale::class;
+  protected $rationaleDataType = '';
   public $score;
+  /**
+   * @var bool
+   */
+  public $skipValue;
   /**
    * @var string
    */
@@ -106,6 +112,20 @@ class GoogleCloudContactcenterinsightsV1QaAnswerAnswerValue extends \Google\Mode
   {
     return $this->potentialScore;
   }
+  /**
+   * @param GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale
+   */
+  public function setRationale(GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale $rationale)
+  {
+    $this->rationale = $rationale;
+  }
+  /**
+   * @return GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale
+   */
+  public function getRationale()
+  {
+    return $this->rationale;
+  }
   public function setScore($score)
   {
     $this->score = $score;
@@ -113,6 +133,20 @@ class GoogleCloudContactcenterinsightsV1QaAnswerAnswerValue extends \Google\Mode
   public function getScore()
   {
     return $this->score;
+  }
+  /**
+   * @param bool
+   */
+  public function setSkipValue($skipValue)
+  {
+    $this->skipValue = $skipValue;
+  }
+  /**
+   * @return bool
+   */
+  public function getSkipValue()
+  {
+    return $this->skipValue;
   }
   /**
    * @param string

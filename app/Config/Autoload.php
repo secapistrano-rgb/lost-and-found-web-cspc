@@ -88,5 +88,5 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $helpers = ['gravatar'];
+    public $helpers = ['gravatar', 'activity_log'];
 }

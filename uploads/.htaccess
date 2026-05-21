@@ -1,0 +1,12 @@
+# Allow direct access to files in uploads directory
+Options -Indexes
+<Files "*">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Prevent execution of PHP files
+<Files "*.php">
+    Order Deny,Allow
+    Deny from all
+</Files>

@@ -1,0 +1,17 @@
+# Disable server signature start
+ServerSignature Off
+
+# Disable server signature end
+Options +FollowSymLinks
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine on
+
+# Allow direct access to uploads folder
+RewriteCond %{REQUEST_URI} ^/capstone-cspc404/uploads/.*$
+RewriteRule ^(.*)$ - [L]
+
+# Handle Angular HTML5 routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L]

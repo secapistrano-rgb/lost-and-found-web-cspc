@@ -51,8 +51,26 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
+        // Set timezone to Philippine Time for all controllers
+        date_default_timezone_set('Asia/Manila');
+
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = service('session');
+        
+        // Set no-cache headers for all authenticated pages
+        $this->setNoCacheHeaders();
+    }
+    
+    /**
+     * Set headers to prevent browser caching
+     * This prevents back button access after logout
+     */
+    protected function setNoCacheHeaders()
+    {
+        $this->response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+        $this->response->setHeader('Pragma', 'no-cache');
+        $this->response->setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
+        $this->response->setHeader('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
     }
 }

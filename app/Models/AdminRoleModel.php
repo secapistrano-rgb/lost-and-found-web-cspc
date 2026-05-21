@@ -8,6 +8,6 @@ class AdminRoleModel extends Model
 {
     protected $table = 'admin_role';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'email', 'role', 'profile_pic', 'created_at', 'updated_at'];
+    protected $allowedFields = ['name', 'email', 'role', 'profile_pic', 'password'];
     protected $useTimestamps = true;
 }
