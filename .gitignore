@@ -1,2 +1,33 @@
 .env
 .env.*
+
+# Composer / PHP
+/vendor/
+composer.lock
+
+# Composer PHAR
+composer.phar
+
+# PHPUnit
+.phpunit.result.cache
+
+# Logs and databases
+logs/
+*.log
+*.sqlite
+*.sqlite3
+
+# IDE / Editor
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Build outputs
+build/
