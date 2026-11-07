@@ -21,6 +21,9 @@ logs/
 /lost_and_found.sql
 /privkey.pem
 
+# Local API server source
+/server.js
+
 # IDE / Editor
 .idea/
 *.sublime-workspace
