@@ -1,60 +1,161 @@
-# CodeIgniter 4 Framework
+# CSPC Lost and Found
 
-## What is CodeIgniter?
+A campus lost and found management application for Camarines Sur Polytechnic Colleges (CSPC). It gives administrators and staff a central place to manage reported items, review ownership claims, track matches, and communicate with users.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+The web application uses PHP and CodeIgniter with a MySQL database. It also includes API routes for authentication, user management, and selected support features.
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Features
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+| Module | Capabilities |
+| --- | --- |
+| Dashboard | Overview of items, claims, and system activity |
+| Items | Create, view, edit, and remove lost and found records with images |
+| Claims | Review ownership claims, supporting evidence, and claim status |
+| Matches | Review potential matches, approve or reject them, and resolve cases |
+| Users and roles | Manage user accounts, suspensions, and administrative roles |
+| Email and notifications | Compose messages, manage templates, review delivery logs, and track replies |
+| Reports | View item and claim reports, analytics, and export results |
+| Activity logs | Review recorded actions for auditing and troubleshooting |
+| Feedback and support | Respond to feedback, manage tickets, and maintain FAQs and announcements |
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+Administrative roles include `super_admin`, `admin`, and `staff`. Access is controlled by the application's authentication and role filters.
 
-## Important Change with index.php
+## Technology
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- **Backend:** PHP, CodeIgniter 4.6.1, MySQL through MySQLi.
+- **Interface:** PHP views, JavaScript, Bootstrap 5, Tailwind CSS, and custom styles. Some assets load from CDNs.
+- **Integrations:** reCAPTCHA, SMTP email, and Gmail IMAP reply polling.
+- **Libraries:** Dompdf for PDF generation, Firebase PHP-JWT, and Google API Client.
+- **Testing:** PHPUnit, configured through `phpunit.xml.dist`.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## Requirements
 
-**Please** read the user guide for a better explanation of how CI4 works!
+- PHP compatible with the `^8.1` constraint in `composer.json` and installed dependencies.
+- Composer.
+- MySQL; the supplied database snapshot was exported from MySQL 8.0.
+- PHP extensions `intl`, `mbstring`, and `mysqli`, plus extensions required by Composer packages.
+- PHP IMAP support if using Gmail reply polling.
+- Internet access for CDN assets, reCAPTCHA, and configured email services.
 
-## Repository Management
+## Run locally
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+Run the following commands from the project root.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+### 1. Install dependencies
 
-## Contributing
+```sh
+composer install
+```
 
-We welcome contributions from the community.
+CodeIgniter is bundled in `system/`. Keep this folder: the application's path configuration loads the framework from it.
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+### 2. Configure the environment
 
-## Server Requirements
+Create a `.env` file in the project root. There is no environment template included in this copy.
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+```dotenv
+CI_ENVIRONMENT = development
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+app.baseURL = 'http://localhost:8080/'
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+database.default.hostname = localhost
+database.default.database = lost_and_found
+database.default.username = your_database_user
+database.default.password = your_database_password
+database.default.DBDriver = MySQLi
+database.default.port = 3306
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+RECAPTCHA_SITE_KEY = your_site_key
+RECAPTCHA_SECRET_KEY = your_secret_key
+```
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Use reCAPTCHA keys configured for your local hostname. The login page reads both keys from the environment and expects an `@my.cspc.edu.ph` account.
+
+### 3. Prepare the database
+
+Create a local database using your MySQL administration tool, then import the supplied snapshot:
+
+```sh
+mysql -u your_database_user -p lost_and_found < lost_and_found.sql
+```
+
+Import into an empty local database. The snapshot contains data and table definitions, including triggers with `root@localhost` definers; review those definitions and adapt them to your database permissions before importing.
+
+Active migrations are in `app/Database/Migrations/`. Review migration status and schema differences before applying further migrations to an imported snapshot. Files in `temp_migrations/` are inactive reference files.
+
+### 4. Start the web application
+
+Ensure PHP can write to `writable/` and the upload directories used by your installation, then run:
+
+```sh
+php spark serve
+```
+
+Open **http://localhost:8080/**. Sign in with an account provisioned in your local database. This README does not define a demo account.
+
+## Email configuration
+
+Configure outgoing mail through `app/Config/Email.php` or its corresponding environment overrides, including `email.SMTPHost`, `email.SMTPUser`, `email.SMTPPass`, `email.SMTPPort`, and `email.SMTPCrypto`.
+
+For Gmail reply polling, configure these environment values and enable PHP IMAP support:
+
+```dotenv
+GMAIL_EMAIL = your_mailbox@gmail.com
+GMAIL_APP_PASSWORD = your_app_password
+GMAIL_IMAP_HOST = imap.gmail.com
+GMAIL_IMAP_PORT = 993
+```
+
+Reply polling is implemented in `app/Controllers/EmailPollerController.php`; its routes are defined in `app/Config/Routes.php`.
+
+## Project structure
+
+```text
+app/
+  Config/             Application settings, routes, and filters configuration
+  Controllers/        Web and API request handlers
+  Database/           Active migrations and seeders
+  Filters/            Authentication and access checks
+  Helpers/            Shared helper functions and services
+  Libraries/          Application libraries
+  Models/             Database access
+  Views/              Pages and layouts
+public/
+  assets/             Browser JavaScript and styles
+  images/             Interface images
+  uploads/            Uploaded item images
+  index.php           Web entry point
+system/               Bundled CodeIgniter framework
+writable/             Runtime cache, logs, sessions, and uploads
+tests/                PHPUnit tests and fixtures
+docs/                 Maintenance records and historical notes
+temp_migrations/      Inactive migration references
+lost_and_found.sql    Database snapshot
+server.js             Separate Node.js API source
+```
+
+`server.js` references local services such as `matchingService` and `notificationService` that are absent from this copy, and no Node.js package manifest is included. Running that service requires restoring its dependencies and reviewing its environment settings. The PHP web application starts through `spark` or `public/index.php`.
+
+## Testing
+
+After installing Composer development dependencies, run:
+
+```sh
+composer test
+```
+
+The suite includes application health checks, database and session examples, and user deletion tests. Database tests require a compatible test schema. Configure the `tests` database group in `app/Config/Database.php` or through `database.tests.*` environment values; the current default uses SQLite in memory.
+
+See [testing guidance](tests/README.md) and [user deletion test documentation](tests/USER_DELETION_TEST_DOCUMENTATION.md) for additional context.
+
+## Hosting
+
+Point the web server's document root at `public/`, configure the application URL, and use `CI_ENVIRONMENT = production`. Keep `writable/` writable by the PHP process. Apache rewrite rules are provided in `public/.htaccess`.
+
+## Maintenance
+
+Historical implementation notes are kept in [docs/history/](docs/history/). They may refer to files removed during cleanup. See [maintenance and recovery notes](docs/README.md) for the cleanup manifests and recovery archive locations.
+
+## License
+
+See [LICENSE](LICENSE) for the included MIT license and CodeIgniter copyright notices.

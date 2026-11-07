@@ -1,0 +1,19 @@
+{
+  "backup": "/tmp/lost-and-found-scripts-20261107-051819.tar.gz",
+  "removed": [
+    "check_trigger.sql",
+    "create_fake_report_trigger.sql",
+    "database_trigger_match_notifications.sql",
+    "deploy_email_system.ps1",
+    "deploy_email_system.sh",
+    "fix_claim_trigger.sql",
+    "fix_notifications_web_table.sql",
+    "fix_notify_finder_trigger.sql",
+    "install_email_reply_system.sql",
+    "setup_email_reply_notifications.sql",
+    "test_match_notification.sql",
+    "test_notifications.sql",
+    "test_user_deletion_cascade.sql",
+    "test_user_deletion_runner.php"
+  ]
+}
