@@ -164,13 +164,15 @@ CSPC Lost & Found - Email Management
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<div class="mg-page mg-emails">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Enhanced Header Section -->
-    <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
+    <div class="mg-page-header glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between p-6 space-y-4 lg:space-y-0">
             <div class="space-y-3">
-                <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">Email Management</h1>
-                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Monitor and manage email notifications across the system</p>
+                <p class="mg-eyebrow">COMMUNICATIONS</p>
+                    <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">Email Management</h1>
+                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Keep recovery conversations and email delivery in one place.</p>
                 <div class="flex items-center space-x-4 text-sm text-gray-500">
                     <div class="flex items-center space-x-2">
                         <div class="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -217,8 +219,8 @@ CSPC Lost & Found - Email Management
     <?php endif; ?>
 
     <!-- Enhanced Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div class="bg-gradient-to-br from-blue-50/80 to-blue-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float">
+    <div class="mg-stat-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="mg-stat-card bg-gradient-to-br from-blue-50/80 to-blue-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-blue-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -233,7 +235,7 @@ CSPC Lost & Found - Email Management
             </div>
         </div>
         
-        <div class="bg-gradient-to-br from-green-50/80 to-green-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 0.5s;">
+        <div class="mg-stat-card bg-gradient-to-br from-green-50/80 to-green-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 0.5s;">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-green-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -248,7 +250,7 @@ CSPC Lost & Found - Email Management
             </div>
         </div>
         
-        <div class="bg-gradient-to-br from-red-50/80 to-red-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1s;">
+        <div class="mg-stat-card bg-gradient-to-br from-red-50/80 to-red-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1s;">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 via-red-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -263,7 +265,7 @@ CSPC Lost & Found - Email Management
             </div>
         </div>
         
-        <div class="bg-gradient-to-br from-orange-50/80 to-orange-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1.5s;">
+        <div class="mg-stat-card bg-gradient-to-br from-orange-50/80 to-orange-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1.5s;">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 via-orange-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -316,7 +318,7 @@ CSPC Lost & Found - Email Management
                 </div>
             <?php else: ?>
                 <div class="overflow-x-auto">
-                    <table class="w-full" id="recentEmailsTable">
+                    <div class="mg-table-container"><table class="mg-table w-full" id="recentEmailsTable">
                         <thead>
                             <tr class="bg-gradient-to-r from-gray-50/80 to-blue-50/50 backdrop-blur-sm">
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200/50">Recipient</th>
@@ -392,7 +394,7 @@ CSPC Lost & Found - Email Management
                                 </tr>
                             <?php endforeach; ?>
                          </tbody>
-                     </table>
+                     </table></div>
                  </div>
                  
                  <!-- Pagination -->
@@ -778,4 +780,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+</div>
 <?= $this->endSection() ?>
