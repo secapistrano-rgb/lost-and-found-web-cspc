@@ -5,7 +5,6 @@ Match Management
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="mg-page mg-matches">
 <style>
     /* Glass card styling */
     .glass-card {
@@ -142,14 +141,13 @@ Match Management
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 sm:p-6 lg:p-8">
     <div class="max-w-7xl mx-auto">
         <!-- Header Section -->
-        <div class="mg-page-header bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 mb-6">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 mb-6">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
                 <div class="space-y-2">
-                     <p class="mg-eyebrow">ITEM RECOVERY</p>
-                    <h1 class="display-6 display-md-5 fw-bold text-dark mb-2 responsive-page-title">
+                     <h1 class="display-6 display-md-5 fw-bold text-dark mb-2 responsive-page-title">
                     <span class="text-gradient">Match Management</span>
                 </h1>
-                    <p class="text-lg text-gray-600 font-medium max-w-2xl">Compare lost and found reports and review potential connections.</p>
+                    <p class="text-lg text-gray-600 font-medium max-w-2xl">Monitor and manage lost & found matches</p>
                     <div class="flex items-center space-x-4 text-sm text-gray-500">
                         <div class="flex items-center space-x-2">
                             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -165,15 +163,8 @@ Match Management
 
 
 
-        <?= view('components/management_summary', ['summaryCards' => [
-    ['label' => 'Matches on this page', 'value' => count($matches ?? []), 'icon' => 'bi-intersect', 'tone' => 'blue'],
-    ['label' => 'Pending review', 'value' => count(array_filter($matches ?? [], static fn($row) => ($row['status'] ?? '') === 'pending')), 'icon' => 'bi-hourglass-split', 'tone' => 'amber'],
-    ['label' => 'Accepted', 'value' => count(array_filter($matches ?? [], static fn($row) => ($row['status'] ?? '') === 'accepted')), 'icon' => 'bi-check2-circle', 'tone' => 'green'],
-    ['label' => 'Resolved', 'value' => count(array_filter($matches ?? [], static fn($row) => ($row['status'] ?? '') === 'resolved')), 'icon' => 'bi-archive', 'tone' => 'slate']
-]]) ?>
-
-<!-- Filters Section -->
-        <div class="mg-filter-panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 mb-6">
+        <!-- Filters Section -->
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 mb-6">
             <form action="<?= site_url('matches') ?>" method="get" class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <!-- Status Filter -->
                 <div class="space-y-2">
@@ -219,7 +210,7 @@ Match Management
         <!-- Match Details Container -->
         <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden" style="max-height: none;">
             <div class="overflow-x-auto" style="max-height: none; overflow-y: visible;">
-                <div class="mg-table-container"><table class="mg-table min-w-full divide-y divide-gray-200">
+                <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gradient-to-r from-gray-50/80 to-blue-50/50 backdrop-blur-sm">
                         <tr>
                             <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">#</th>
@@ -472,7 +463,7 @@ Match Management
                             </td>
                         </tr>
                     </tbody>
-                </table></div>
+                </table>
             </div>
             
             <!-- Pagination -->
@@ -683,6 +674,4 @@ function confirmDelete(matchId) {
 
 </script>
 
-
-</div>
 <?= $this->endSection() ?>

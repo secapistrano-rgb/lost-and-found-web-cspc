@@ -5,7 +5,6 @@ Role Management
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="mg-page mg-roles">
 <style>
     /* Glass card styling */
     .glass-card {
@@ -94,13 +93,12 @@ Role Management
 
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
     <!-- Header Section -->
-    <div class="mg-page-header glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6 overflow-hidden">
+    <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6 overflow-hidden">
         <!-- <div class="h-1 bg-blue-600"></div> -->
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between p-6 space-y-4 lg:space-y-0">
             <div class="space-y-3">
-                <p class="mg-eyebrow">ADMINISTRATION</p>
-                    <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">Role Management</h1>
-                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Manage the people responsible for your lost and found workspace.</p>
+                <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">Role Management</h1>
+                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Manage admin roles and permissions</p>
                 <div class="flex items-center space-x-4 text-sm text-gray-500">
                     <div class="flex items-center space-x-2">
                         <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -112,15 +110,8 @@ Role Management
         </div>
     </div>
 
-    <?= view('components/management_summary', ['summaryCards' => [
-    ['label' => 'Accounts on this page', 'value' => count($roles ?? []), 'icon' => 'bi-people', 'tone' => 'blue'],
-    ['label' => 'Super admins', 'value' => count(array_filter($roles ?? [], static fn($row) => ($row['role'] ?? '') === 'super_admin')), 'icon' => 'bi-shield-lock', 'tone' => 'slate'],
-    ['label' => 'Administrators', 'value' => count(array_filter($roles ?? [], static fn($row) => ($row['role'] ?? '') === 'admin')), 'icon' => 'bi-person-gear', 'tone' => 'green'],
-    ['label' => 'Staff members', 'value' => count(array_filter($roles ?? [], static fn($row) => ($row['role'] ?? '') === 'staff')), 'icon' => 'bi-person-badge', 'tone' => 'amber']
-]]) ?>
-
-<!-- Search, Filter & Actions Section -->
-    <div class="mg-filter-panel bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+    <!-- Search, Filter & Actions Section -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-6">
             <!-- Search Bar -->
             <div class="flex-1 lg:max-w-md">
@@ -164,7 +155,7 @@ Role Management
     <!-- Roles Table -->
     <div class="glass-card rounded-2xl overflow-hidden" style="max-height: none;">
         <div class="overflow-x-auto" style="max-height: none; overflow-y: visible;">
-            <div class="mg-table-container"><table class="mg-table w-full">
+            <table class="w-full">
                 <thead class="bg-gradient-to-r from-slate-50 to-blue-50">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
@@ -210,7 +201,7 @@ Role Management
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800">
-                                        <?= esc(ucwords(str_replace('_', ' ', $role['role']))) ?>
+                                        <?= esc(ucwords($role['role'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-center">
@@ -249,7 +240,7 @@ Role Management
                         </tr>
                     <?php endif; ?>
                 </tbody>
-            </table></div>
+            </table>
             
             <!-- Pagination -->
             <?php if (isset($pager) && $pager->getPageCount() > 1): ?>
@@ -266,8 +257,6 @@ Role Management
     </div>
 </div>
 
-
-</div>
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>

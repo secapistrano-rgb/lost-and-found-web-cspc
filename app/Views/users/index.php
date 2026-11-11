@@ -5,7 +5,6 @@ User Management
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="mg-page mg-users">
 <style>
     /* Compact Design Styles */
     .flex { display: flex; }
@@ -194,12 +193,11 @@ User Management
 </style>
 
     <!-- Header Section -->
-    <div class="mg-page-header glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
+    <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between p-6 space-y-4 lg:space-y-0">
             <div class="space-y-3">
-                <p class="mg-eyebrow">ADMINISTRATION</p>
-                    <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">User Management</h1>
-                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Manage community accounts, access, and account status.</p>
+                <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">User Management</h1>
+                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Monitor and manage system users efficiently</p>
                 <div class="flex items-center space-x-4 text-sm text-gray-500">
                     <div class="flex items-center space-x-2">
                         <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -212,15 +210,8 @@ User Management
     </div>
 
 
-    <?= view('components/management_summary', ['summaryCards' => [
-    ['label' => 'Users on this page', 'value' => count($users ?? []), 'icon' => 'bi-people', 'tone' => 'blue'],
-    ['label' => 'Active accounts', 'value' => count(array_filter($users ?? [], static fn($row) => strtolower($row['status'] ?? '') === 'active')), 'icon' => 'bi-person-check', 'tone' => 'green'],
-    ['label' => 'Suspended accounts', 'value' => count(array_filter($users ?? [], static fn($row) => str_contains(strtolower($row['status'] ?? ''), 'suspended'))), 'icon' => 'bi-person-slash', 'tone' => 'amber'],
-    ['label' => 'Two-factor enabled', 'value' => count(array_filter($users ?? [], static fn($row) => ($row['two_factor_enabled'] ?? '') === 'Enabled')), 'icon' => 'bi-shield-check', 'tone' => 'slate']
-]]) ?>
-
-<!-- Filters Section -->
-    <div class="mg-filter-panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 mb-6">
+    <!-- Filters Section -->
+    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 mb-6">
         <form action="<?= site_url('users') ?>" method="get" class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <!-- Department Filter -->
             <div class="space-y-2">
@@ -301,7 +292,7 @@ User Management
         <!-- Users Table Container -->
         <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden" style="max-height: none;">
             <div class="overflow-x-auto" style="max-height: none; overflow-y: visible;">
-                <div class="mg-table-container"><table class="mg-table min-w-full divide-y divide-gray-200" id="usersTable">
+                <table class="min-w-full divide-y divide-gray-200" id="usersTable">
                     <thead class="bg-gradient-to-r from-gray-50/80 to-blue-50/50 backdrop-blur-sm">
                         <tr>
                             <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Profile</th>
@@ -459,24 +450,47 @@ User Management
                                             Disabled
                                         </span>
                                     <?php endif; ?>
+                                </
+/span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="user-actions" role="group" aria-label="Actions for <?= esc($user['full_name'] ?? 'user', 'attr') ?>">
-                                        <a class="user-action user-action--view" href="<?= site_url('users/view/' . $user['id']) ?>" title="View Details"><i class="bi bi-eye" aria-hidden="true"></i><span>View</span></a>
-                                        <a class="user-action user-action--edit" href="<?= site_url('users/edit/' . $user['id']) ?>" title="Edit User"><i class="bi bi-pencil" aria-hidden="true"></i><span>Edit</span></a>
-                                        <?php if (in_array(strtolower($user['status'] ?? ''), ['suspended', 'temporary suspended', 'permanently suspended'], true)): ?>
-                                            <button type="button" class="user-action user-action--restore" onclick="if(confirm('Are you sure you want to unsuspend this user?')) window.location.href='<?= site_url('users/unsuspend/' . $user['id']) ?>'" title="Unsuspend User"><i class="bi bi-person-check" aria-hidden="true"></i><span>Unsuspend</span></button>
+                                    <div class="flex space-x-2">
+                                        <button type="button" class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-medium rounded-md hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" onclick="window.location.href='<?= site_url('users/view/' . $user['id']) ?>'" title="View Details">
+                                            <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-medium rounded-md hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" onclick="window.location.href='<?= site_url('users/edit/' . $user['id']) ?>'" title="Edit User">
+                                            <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </button>
+                                        <?php if (isset($user['status']) && ($user['status'] === 'Suspended' || $user['status'] === 'Temporary Suspended' || $user['status'] === 'Permanently Suspended')): ?>
+                                            <button type="button" class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-medium rounded-md hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" onclick="if(confirm('Are you sure you want to unsuspend this user?')) window.location.href='<?= site_url('users/unsuspend/' . $user['id']) ?>'" title="Unsuspend User">
+                                                <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            </button>
                                         <?php else: ?>
-                                            <button type="button" class="user-action user-action--suspend" data-user-id="<?= esc($user['id'], 'attr') ?>" data-user-name="<?= esc($user['full_name'] ?? 'user', 'attr') ?>" onclick="openSuspendModal(this.dataset.userId, this.dataset.userName)" title="Suspend User"><i class="bi bi-person-slash" aria-hidden="true"></i><span>Suspend</span></button>
+                                            <button type="button" class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs font-medium rounded-md hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" onclick="openSuspendModal(<?= $user['id'] ?>, '<?= esc($user['full_name']) ?>')" title="Suspend User">
+                                                <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636L5.636 18.364M5.636 5.636l12.728 12.728M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            </button>
                                         <?php endif; ?>
-                                        <button type="button" class="user-action user-action--delete" onclick="if(confirm('Are you sure you want to delete this user?')) window.location.href='<?= site_url('users/delete/' . $user['id']) ?>'" title="Delete User"><i class="bi bi-trash" aria-hidden="true"></i><span>Delete</span></button>
+                                        <button type="button" class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-medium rounded-md hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" onclick="if(confirm('Are you sure you want to delete this user?')) window.location.href='<?= site_url('users/delete/' . $user['id']) ?>'" title="Delete User">
+                                            <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="8" class="px-6 py-12 text-center">
+                            <td colspan="7" class="px-6 py-12 text-center">
                                 <div class="flex flex-col items-center justify-center space-y-3">
                                     <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
                                         <i class="bi bi-people text-gray-400 text-xl"></i>
@@ -488,7 +502,7 @@ User Management
                         </tr>
                     <?php endif; ?>
                 </tbody>
-            </table></div>
+            </table>
         </div>
         
         <!-- Pagination -->
@@ -507,8 +521,6 @@ User Management
     </div>
 </div>
 
-
-</div>
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
@@ -626,13 +638,12 @@ User Management
     function openSuspendModal(userId, userName) {
         document.getElementById('suspendForm').action = '<?= site_url('users/suspend') ?>/' + userId;
         document.getElementById('suspendUserName').textContent = userName;
-        document.getElementById('suspendModal').showModal();
+        document.getElementById('suspendModal').classList.remove('hidden');
     }
 
     function closeSuspendModal() {
-        document.getElementById('suspendModal').close();
+        document.getElementById('suspendModal').classList.add('hidden');
         document.getElementById('suspendForm').reset();
-        toggleSuspensionDays();
     }
 
     function toggleSuspensionDays() {
@@ -693,12 +704,12 @@ User Management
 </script>
 
 <!-- Suspension Modal -->
-<dialog id="suspendModal" class="mg-suspend-dialog" aria-labelledby="suspendModalTitle">
+<div id="suspendModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3">
             <div class="flex items-center justify-between mb-4">
-                <h3 id="suspendModalTitle" class="text-lg font-medium text-gray-900">Suspend User</h3>
-                <button type="button" onclick="closeSuspendModal()" aria-label="Close suspension dialog" class="text-gray-400 hover:text-gray-600">
+                <h3 class="text-lg font-medium text-gray-900">Suspend User</h3>
+                <button type="button" onclick="closeSuspendModal()" class="text-gray-400 hover:text-gray-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
@@ -710,7 +721,6 @@ User Management
             </p>
             
             <form id="suspendForm" action="<?= site_url('users/suspend') ?>" method="POST">
-                <?= csrf_field() ?>
                 
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Suspension Type</label>
@@ -747,7 +757,7 @@ User Management
             </form>
         </div>
     </div>
-</dialog>
+</div>
 
 <?= $this->endSection() ?>
 

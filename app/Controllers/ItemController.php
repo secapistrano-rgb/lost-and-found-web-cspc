@@ -50,9 +50,6 @@ class ItemController extends BaseController
             $builder->groupStart()
                     ->like('title', $search)
                     ->orLike('description', $search)
-                    ->orLike('category', $search)
-                    ->orLike('location', $search)
-                    ->orLike('reporter_name', $search)
                     ->groupEnd();
         }
 
@@ -61,11 +58,7 @@ class ItemController extends BaseController
         }
 
         if ($statusFilter) {
-            $statusAliases = [
-                'Pending Turning-in' => ['Pending Turning-in', 'pending_turnin', 'pending turning-in'],
-                'Fake Report' => ['Fake Report', 'fake_report'],
-            ];
-            $builder->whereIn('status', $statusAliases[$statusFilter] ?? [$statusFilter]);
+            $builder->where('status', $statusFilter);
         }
 
         if ($typeFilter) {
@@ -73,11 +66,8 @@ class ItemController extends BaseController
         }
 
         // Use configurable per-page limit (default: 50, but allows up to 100)
-        $perPage = (int) $this->request->getGet('per_page');
-        $perPage = in_array($perPage, [25, 50, 75, 100], true) ? $perPage : 50;
-
-        $filterCategories = (new ItemModel())->select('category')->distinct()
-            ->where('category !=', '')->orderBy('category', 'asc')->findAll();
+        $perPage = (int) $this->request->getGet('per_page') ?: 50;
+        $perPage = min($perPage, 100); // Cap at 100 for performance
 
         $allItems = $builder->orderBy('created_at', 'desc')->paginate($perPage, 'items');
         
@@ -116,7 +106,7 @@ class ItemController extends BaseController
 
         return view('dashboard/items', [
             'allItems' => $allItems,
-            'categories' => array_column($filterCategories, 'category'),
+            'categories' => $this->categories,
             'search' => $search,
             'selectedCategory' => $category,
             'selectedStatus' => $statusFilter,

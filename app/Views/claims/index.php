@@ -5,7 +5,6 @@ Claims Management
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="mg-page mg-claims">
 <style>
     /* Glass card styling */
     .glass-card {
@@ -87,12 +86,11 @@ Claims Management
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
     <div class="max-w-7xl mx-auto">
         <!-- Header Section -->
-        <div class="mg-page-header glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
+        <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between p-6 space-y-4 lg:space-y-0">
                 <div class="space-y-3">
-                    <p class="mg-eyebrow">ITEM RECOVERY</p>
                     <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">Claims Management</h1>
-                    <p class="text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Review ownership evidence and help verified claims move forward.</p>
+                    <p class="text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Monitor and manage lost & found claims</p>
                     <div class="flex items-center space-x-4 text-sm text-gray-500">
                         <div class="flex items-center space-x-2">
                             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -106,15 +104,8 @@ Claims Management
             </div>
         </div>
 
-        <?= view('components/management_summary', ['summaryCards' => [
-    ['label' => 'Claims on this page', 'value' => count($claims ?? []), 'icon' => 'bi-file-earmark-check', 'tone' => 'blue'],
-    ['label' => 'Awaiting review', 'value' => count(array_filter($claims ?? [], static fn($row) => ($row['status'] ?? '') === 'pending')), 'icon' => 'bi-hourglass-split', 'tone' => 'amber'],
-    ['label' => 'Approved', 'value' => count(array_filter($claims ?? [], static fn($row) => in_array($row['status'] ?? '', ['approved', 'verified'], true))), 'icon' => 'bi-check2-circle', 'tone' => 'green'],
-    ['label' => 'Resolved', 'value' => count(array_filter($claims ?? [], static fn($row) => ($row['status'] ?? '') === 'resolved')), 'icon' => 'bi-archive', 'tone' => 'slate']
-]]) ?>
-
-<!-- Filters and Search -->
-        <div class="mg-filter-panel glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-lg mb-6">
+        <!-- Filters and Search -->
+        <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-lg mb-6">
             <div class="p-6">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <!-- Category Filter -->
@@ -147,13 +138,14 @@ Claims Management
                         </select>
                     </div>
 
-                    <!-- Match context filter -->
+                    <!-- Type Filter -->
                     <div class="space-y-2">
-                        <label class="block text-sm font-semibold text-gray-700">Claim context</label>
+                        <label class="block text-sm font-semibold text-gray-700">Type</label>
                         <select class="w-full px-4 py-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" id="typeFilter">
-                            <option value="">All claims</option>
-                            <option value="matched">Linked to a match</option>
-                            <option value="unmatched">No match linked</option>
+                            <option value="">All Types</option>
+                            <option value="lost">Lost Items</option>
+                            <option value="found">Found Items</option>
+                            <option value="matched">Matched Items</option>
                         </select>
                     </div>
 
@@ -176,10 +168,10 @@ Claims Management
 
         <!-- Claims Grid -->
         <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-lg">
-            <!-- Shared table / responsive card list -->
-            <div class="mg-claims-list">
+            <!-- Desktop Table View -->
+            <div class="hidden lg:block">
                 <div class="overflow-hidden rounded-2xl" style="max-height: none; overflow-y: visible;">
-                    <div class="mg-table-container"><table class="mg-table w-full">
+                    <table class="w-full">
                         <thead class="bg-gray-50/80 backdrop-blur-sm">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">#</th>
@@ -192,7 +184,7 @@ Claims Management
                         <tbody id="claimsTableBody" class="bg-white/50 backdrop-blur-sm divide-y divide-gray-200">
                         <?php if (!empty($claims)): ?>
                             <?php foreach($claims as $index => $claim): ?>
-                            <tr data-claim-category="<?= esc(strtolower(($claim['lost_item_category'] ?? '') . '|' . ($claim['found_item_category'] ?? ''))) ?>" data-claim-status="<?= esc(strtolower($claim['status'] ?? '')) ?>" data-claim-context="<?= !empty($claim['match_id']) ? 'matched' : 'unmatched' ?>" class="hover:bg-gray-50/50 transition-colors duration-200">
+                            <tr class="hover:bg-gray-50/50 transition-colors duration-200">
                                 <td class="px-6 py-4 text-center text-sm font-medium text-gray-900"><?= $index + 1 ?></td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-start space-x-4">
@@ -517,7 +509,83 @@ Claims Management
                             </tr>
                         <?php endif; ?>
                     </tbody>
-                </table></div>
+                </table>
+            </div>
+        </div>
+        
+            <!-- Mobile Card View -->
+            <div class="lg:hidden">
+                <div class="p-0">
+                    <?php if (!empty($claims)): ?>
+                        <div class="space-y-4">
+                            <?php foreach($claims as $index => $claim): ?>
+                                <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-xl shadow-lg p-4">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">#<?= $index + 1 ?></span>
+                                        <div class="flex space-x-1">
+                                            <a href="<?= site_url('claims/view/' . $claim['id']) ?>" 
+                                               class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-medium rounded-md hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" title="View">
+                                                <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                                </svg>
+                                            </a>
+                                            <a href="<?= site_url('claims/edit/' . $claim['id']) ?>" 
+                                               class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-medium rounded-md hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" title="Edit">
+                                                <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                                </svg>
+                                            </a>
+                                            <button onclick="confirmDelete('<?= $claim['id'] ?>')" 
+                                                    class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-medium rounded-md hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-110 hover:-translate-y-1 group" title="Delete">
+                                                <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <h6 class="card-title mb-1 text-truncate"><?= esc($claim['lost_item_title'] ?? $claim['found_item_title'] ?? 'N/A') ?></h6>
+                                        <small class="text-muted"><?= esc($claim['lost_item_category'] ?? $claim['found_item_category'] ?? 'N/A') ?></small>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <i class="bi bi-person text-muted"></i>
+                                            <span class="small"><?= esc($claim['claimant_name']) ?></span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <i class="bi bi-envelope text-muted"></i>
+                                            <span class="small text-truncate"><?= esc($claim['claimant_email'] ?? $claim['claimant_id']) ?></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center">
+                                        <span class="badge bg-<?= $claim['status'] === 'approved' ? 'success' : ($claim['status'] === 'pending' ? 'warning' : 'danger') ?>">
+                                            <?= ucfirst($claim['status']) ?>
+                                        </span>
+                                        <small class="text-muted"><?= date('M j, Y', strtotime($claim['created_at'])) ?></small>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <div class="text-center py-5">
+                        <div class="mb-3">
+                            <i class="bi bi-file-text display-1 text-muted"></i>
+                        </div>
+                        <h5 class="text-muted mb-2">No Claims Yet</h5>
+                        <p class="text-muted small mb-3">
+                            Claims will appear here when users submit ownership requests for lost items.
+                        </p>
+                        <a href="<?= site_url('items') ?>" class="btn btn-primary btn-sm">
+                            <i class="bi bi-box me-1"></i>
+                            View All Items
+                        </a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         
@@ -536,8 +604,6 @@ Claims Management
         <?php endif; ?>
     </div>
     </div>
-</div>
-
 </div>
 <?= $this->endSection() ?>
 
@@ -570,11 +636,44 @@ Claims Management
                     }
                 }
                 
-                // Match stored values rather than presentation labels (e.g. Denied/rejected).
-                if (categoryFilter && !row.dataset.claimCategory.split('|').map(value => value.trim()).includes(categoryFilter.toLowerCase())) showRow = false;
-                if (statusFilter && row.dataset.claimStatus !== statusFilter.toLowerCase()) showRow = false;
-                if (typeFilter && row.dataset.claimContext !== typeFilter) showRow = false;
-
+                // Category filter
+                if (categoryFilter && showRow) {
+                    const categorySpan = row.querySelector('td:nth-child(2) .text-xs.text-gray-500');
+                    if (categorySpan) {
+                        const categoryText = categorySpan.textContent.toLowerCase().trim();
+                        if (!categoryText.includes(categoryFilter.toLowerCase())) {
+                            showRow = false;
+                        }
+                    }
+                }
+                
+                // Status filter
+                if (statusFilter && showRow) {
+                    const statusBadge = row.querySelector('td:nth-child(4) .inline-flex');
+                    if (statusBadge) {
+                        const statusText = statusBadge.textContent.toLowerCase().trim();
+                        if (!statusText.includes(statusFilter.toLowerCase())) {
+                            showRow = false;
+                        }
+                    }
+                }
+                
+                // Type filter (based on claim type or item type)
+                if (typeFilter && showRow) {
+                    const itemTitle = row.querySelector('td:nth-child(2) .claim-item-link');
+                    if (itemTitle) {
+                        const titleText = itemTitle.textContent.toLowerCase();
+                        // Simple logic to determine type based on content
+                        if (typeFilter === 'lost' && !titleText.includes('lost')) {
+                            showRow = false;
+                        } else if (typeFilter === 'found' && !titleText.includes('found')) {
+                            showRow = false;
+                        } else if (typeFilter === 'matched' && !titleText.includes('match')) {
+                            showRow = false;
+                        }
+                    }
+                }
+                
                 row.style.display = showRow ? '' : 'none';
             });
         }

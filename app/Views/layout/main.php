@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="<?= csrf_hash() ?>">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -795,7 +794,7 @@
         .hamburger-line {
             width: 100%;
             height: 3px;
-            background-color: #365c8b;
+            background-color: #ffffff !important;
             border-radius: 2px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform-origin: center;
@@ -856,6 +855,9 @@
             .nav-panel-left {
                 flex: 1;
                 min-width: 200px;
+            }
+        }
+                width: 100%;
             }
         }
         
@@ -937,7 +939,7 @@
         }
         .sidebar-nav a.active {
             background: rgba(255,255,255,0.3);
-            color: #ffffff;
+            color:rgb(3, 23, 56) !important;
             font-weight: 600;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
@@ -1226,14 +1228,12 @@
         }
     </style>
     <?= $this->renderSection('styles') ?>
-    <link rel="stylesheet" href="<?= base_url('assets/css/management.css') ?>">
 </head>
 <body>
-    <aside class="sidebar" id="app-sidebar" aria-label="Workspace navigation">
+    <div class="sidebar">
         <div class="sidebar-header">
             <img src="<?= base_url('images/logo.png') ?>" alt="CSPC Logo">
-            <h3>Lost &amp; Found<br><span>Management workspace</span></h3>
-            <button type="button" class="app-sidebar-close" aria-label="Close navigation"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+            <h3>Lost & Found Management System</h3>
         </div>
         <nav class="sidebar-nav">
             <a href="<?= site_url('dashboard') ?>" class="<?= isActiveModule('dashboard') ? 'active' : '' ?>">
@@ -1390,14 +1390,13 @@
                 </a>
             </div>
         </div>
-    </aside>
-    <button type="button" class="app-sidebar-backdrop" aria-label="Close navigation" hidden></button>
+    </div>
 
     <!-- Navigation Panel -->
     <div class="nav-panel">
         <div class="nav-panel-content">
             <div class="nav-panel-left">
-                <button class="hamburger-menu" id="hamburgerMenu" aria-label="Open navigation" aria-controls="app-sidebar" aria-expanded="false">
+                <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -1410,14 +1409,14 @@
             </div>
             <div class="nav-panel-right">
                 <div class="nav-item">
-                    <button class="nav-btn notification-btn" id="notificationsBtn" aria-label="Notifications">
+                    <button class="nav-btn notification-btn" id="notificationsBtn">
                         <i class="fas fa-bell"></i>
                         <span class="nav-label">Notifications</span>
                         <span class="notification-badge hidden">0</span>
                     </button>
                 </div>
                 <div class="nav-item">
-                    <button class="nav-btn" id="activityBtn" aria-label="Activity logs">
+                    <button class="nav-btn" id="activityBtn">
                         <i class="fas fa-history"></i>
                         <span class="nav-label">Activity Logs</span>
                         <span class="notification-badge activity-count-badge" id="activityCountBadge">0</span>
@@ -1427,7 +1426,7 @@
         </div>
     </div>
 
-    <div class="main-content mg-workspace">
+    <div class="main-content">
         <?php if (session()->getFlashdata('success')): ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('success') ?>
@@ -1449,8 +1448,38 @@
 
         // Hamburger menu toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Navigation behavior is shared in management.js.
-
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const sidebarElement = document.querySelector('.sidebar');
+            
+            if (hamburgerMenu && sidebarElement) {
+                hamburgerMenu.addEventListener('click', function() {
+                    // Toggle sidebar visibility
+                    sidebarElement.classList.toggle('show');
+                    
+                    // Toggle hamburger menu animation
+                    hamburgerMenu.classList.toggle('active');
+                });
+                
+                // Close sidebar when clicking on main content (mobile only)
+                const mainContent = document.querySelector('.main-content');
+                if (mainContent) {
+                    mainContent.addEventListener('click', function() {
+                        if (window.innerWidth <= 768 && sidebarElement.classList.contains('show')) {
+                            sidebarElement.classList.remove('show');
+                            hamburgerMenu.classList.remove('active');
+                        }
+                    });
+                }
+                
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768) {
+                        sidebarElement.classList.remove('show');
+                        hamburgerMenu.classList.remove('active');
+                    }
+                });
+            }
+            
             // Update current time display
             function updateCurrentTime() {
                 const timeElement = document.getElementById('currentTime');
@@ -1621,6 +1650,5 @@
     </script>
     
     <?= $this->renderSection('scripts') ?>
-    <script src="<?= base_url('assets/js/management.js') ?>"></script>
 </body>
 </html>
