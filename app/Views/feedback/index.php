@@ -199,13 +199,15 @@ CSPC Lost & Found - Feedback Management
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<div class="mg-page mg-feedback">
 <div class="container-fluid feedback-page">
     <!-- Modern Header Section -->
-    <div class="glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
+    <div class="mg-page-header glass-card backdrop-blur-md bg-white/90 border border-white/20 rounded-2xl shadow-xl mb-6">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between p-6 space-y-4 lg:space-y-0">
             <div class="space-y-3">
-                <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">Feedback Management</h1>
-                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Manage and monitor user feedback and suggestions</p>
+                <p class="mg-eyebrow">COMMUNITY SUPPORT</p>
+                    <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">Feedback Management</h1>
+                <p class="text-subheading text-base sm:text-lg text-gray-600 font-medium max-w-2xl">Review suggestions, respond to concerns, and close the loop.</p>
                 <div class="flex items-center space-x-4 text-sm text-gray-500">
                     <div class="flex items-center space-x-2">
                         <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -221,9 +223,9 @@ CSPC Lost & Found - Feedback Management
     </div>
 
     <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="mg-stat-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <!-- Total Feedback Card -->
-        <div class="bg-gradient-to-br from-blue-50/80 to-blue-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 0.5s;">
+        <div class="mg-stat-card bg-gradient-to-br from-blue-50/80 to-blue-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 0.5s;">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-blue-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -239,7 +241,7 @@ CSPC Lost & Found - Feedback Management
         </div>
 
         <!-- Pending Card -->
-        <div class="bg-gradient-to-br from-amber-50/80 to-amber-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1s;">
+        <div class="mg-stat-card bg-gradient-to-br from-amber-50/80 to-amber-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1s;">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -255,7 +257,7 @@ CSPC Lost & Found - Feedback Management
         </div>
 
         <!-- Addressed Card -->
-        <div class="bg-gradient-to-br from-green-50/80 to-green-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1.5s;">
+        <div class="mg-stat-card bg-gradient-to-br from-green-50/80 to-green-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 1.5s;">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-green-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -271,7 +273,7 @@ CSPC Lost & Found - Feedback Management
         </div>
 
         <!-- Average Rating Card -->
-        <div class="bg-gradient-to-br from-purple-50/80 to-purple-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 2s;">
+        <div class="mg-stat-card bg-gradient-to-br from-purple-50/80 to-purple-100/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/30 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden animate-float" style="animation-delay: 2s;">
             <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 via-purple-300 to-transparent"></div>
             <div class="relative z-10 flex items-center justify-between">
@@ -288,7 +290,7 @@ CSPC Lost & Found - Feedback Management
     </div>
 
     <!-- Filters -->
-    <div class="card filter-card">
+    <div class="card filter-card mg-filter-panel">
         <div class="card-body">
             <h5 class="card-title"><i class="bi bi-funnel me-2"></i>Filter Feedback</h5>
             <form method="GET" action="<?= site_url('feedback') ?>">
@@ -336,7 +338,7 @@ CSPC Lost & Found - Feedback Management
                                 </div>
                             </div>
                             <input type="text" name="search" id="search" class="form-control ps-5" 
-                                   placeholder="Search Feedback..." value="<?= request()->getGet('search') ?>">
+                                   placeholder="Search Feedback..." value="<?= esc(request()->getGet('search')) ?>">
                         </div>
                     </div>
                 </div>
@@ -347,7 +349,7 @@ CSPC Lost & Found - Feedback Management
     <!-- Modern Feedback List -->
     <div class="glass-card bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/30 overflow-hidden" style="max-height: none;">
         <div class="overflow-x-auto" style="max-height: none; overflow-y: visible;">
-            <table class="w-full" id="feedbackTable">
+            <div class="mg-table-container"><table class="mg-table w-full" id="feedbackTable">
                 <thead>
                     <tr class="bg-gradient-to-r from-gray-50/80 to-blue-50/50 backdrop-blur-sm">
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200/50">Feedback</th>
@@ -469,7 +471,7 @@ CSPC Lost & Found - Feedback Management
                         </tr>
                     <?php endif; ?>
                 </tbody>
-            </table>
+            </table></div>
         </div>
         
         <!-- Pagination -->
@@ -502,6 +504,7 @@ CSPC Lost & Found - Feedback Management
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <form id="deleteForm" method="POST" style="display: inline;">
+                    <?= csrf_field() ?>
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
@@ -512,8 +515,11 @@ CSPC Lost & Found - Feedback Management
 
 <!-- Hidden form for status updates -->
 <form id="statusForm" method="POST" style="display: none;">
+    <?= csrf_field() ?>
     <input type="hidden" name="status" id="statusInput">
 </form>
+
+</div>
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>

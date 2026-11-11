@@ -1,10 +1,11 @@
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('title') ?>
-CSPC Lost and Found – Reports & Analytics
+Reports & Analytics
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<div class="mg-page mg-reports">
 <style>
     .dashboard-container {
         background: var(--cspc-light, #f8f9fa);
@@ -578,16 +579,17 @@ CSPC Lost and Found – Reports & Analytics
 <div class="dashboard-container">
     <div class="container-fluid">
         <!-- Dashboard Header -->
-        <div class="dashboard-header">
+        <div class="mg-page-header dashboard-header">
             <div class="d-flex justify-content-between align-items-start mb-3">
                 <div>
+                    <p class="mg-eyebrow">INSIGHTS & REPORTING</p>
                     <h1 class="text-display text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent mb-2">
-                        CSPC Lost and Found – Reports & Analytics
+                        Reports & Analytics
                     </h1>
-                    <p class="dashboard-subtitle">Comprehensive analytics and insights</p>
+                    <p class="dashboard-subtitle">Understand campus activity, recovery trends, and claim outcomes.</p>
                 </div>
                 <div class="export-buttons">
-                    <button id="exportBtn" class="export-btn" onclick="exportFilteredReport()">
+                    <button id="exportBtn" type="button" class="export-btn">
                         <i class="bi bi-file-earmark-pdf"></i>
                         PDF
                     </button>
@@ -597,7 +599,7 @@ CSPC Lost and Found – Reports & Analytics
         </div>
 
         <!-- Search and Filter Section -->
-        <div class="search-filter-section mb-4">
+        <div class="mg-filter-panel search-filter-section mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="row align-items-end">
@@ -647,7 +649,7 @@ CSPC Lost and Found – Reports & Analytics
         </div>
 
         <!-- Key Metrics Row -->
-        <div class="row mb-2">
+        <div class="row mb-2 mg-stat-grid">
             <div class="col-lg col-md-6 col-sm-6">
                 <div class="stats-card text-center" style="animation-delay: 0s;">
                     <div class="metric-label">Total Reported Items</div>
@@ -657,14 +659,14 @@ CSPC Lost and Found – Reports & Analytics
             </div>
             <div class="col-lg col-md-6 col-sm-6">
                 <div class="stats-card text-center" style="animation-delay: 0.3s;">
-                    <div class="metric-label">Items Successfully Returned</div>
+                    <div class="metric-label">Claim Success Rate</div>
                     <div class="metric-value"><?= number_format($claimSuccessRate ?? 76) ?>%</div>
                     <div class="w-1 h-1 bg-white rounded-full animate-pulse" style="width: 4px; height: 4px; background: rgba(255,255,255,0.6); border-radius: 50%; margin: 8px auto; animation: pulse 2s infinite; animation-delay: 0.5s;"></div>
                 </div>
             </div>
             <div class="col-lg col-md-6 col-sm-6">
                 <div class="stats-card text-center" style="animation-delay: 0.6s;">
-                    <div class="metric-label">Average Processing Time</div>
+                    <div class="metric-label">Average Claim Time</div>
                     <div class="metric-value"><?= number_format($averageClaimTime ?? 2.3, 1) ?> days</div>
                     <div class="w-1 h-1 bg-white rounded-full animate-pulse" style="width: 4px; height: 4px; background: rgba(255,255,255,0.6); border-radius: 50%; margin: 8px auto; animation: pulse 2s infinite; animation-delay: 1s;"></div>
                 </div>
@@ -676,7 +678,7 @@ CSPC Lost and Found – Reports & Analytics
                     <div class="w-1 h-1 bg-white rounded-full animate-pulse" style="width: 4px; height: 4px; background: rgba(255,255,255,0.6); border-radius: 50%; margin: 8px auto; animation: pulse 2s infinite; animation-delay: 1.5s;"></div>
                 </div>
             </div>
-            <div class="col-lg col-md-6 col-sm-6">a
+            <div class="col-lg col-md-6 col-sm-6">
                 <div class="stats-card text-center" style="animation-delay: 1.2s;">
                     <div class="metric-label">Total Email Sent</div>
                     <div class="metric-value"><?= number_format($emailsSent ?? 92) ?></div>
@@ -733,7 +735,7 @@ CSPC Lost and Found – Reports & Analytics
                         Claims Report
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-sm table-borderless">
+                        <div class="mg-table-container"><table class="mg-table table table-sm table-borderless">
                             <thead class="table-light">
                                 <tr>
                                     <th style="font-size: 0.75rem; padding: 6px;">Claim ID</th>
@@ -779,7 +781,7 @@ CSPC Lost and Found – Reports & Analytics
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
-                        </table>
+                        </table></div>
                     </div>
                 </div>
             </div>
@@ -790,7 +792,7 @@ CSPC Lost and Found – Reports & Analytics
                         User Report
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-sm table-borderless">
+                        <div class="mg-table-container"><table class="mg-table table table-sm table-borderless">
                             <thead class="table-light">
                                 <tr>
                                     <th style="font-size: 0.75rem; padding: 6px;">User ID</th>
@@ -813,12 +815,14 @@ CSPC Lost and Found – Reports & Analytics
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
-                        </table>
+                        </table></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </div>
 <?= $this->endSection() ?>
 
